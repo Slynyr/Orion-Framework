@@ -13,6 +13,7 @@
     },
     "license": "MIT",
     "dependencies": [],
-    "frameworks": "esp32, avr",
-    "platforms": "*"
+    "frameworks": "arduino",
+    "platforms": "*",
+    "headers": "orionFramework.h"
 }
