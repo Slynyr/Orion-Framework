@@ -2,22 +2,24 @@
 
 
 
-OrionFramework::OrionFramework() : _isConnected(false), _maxAttempts(3) {}
+OrionFramework::OrionFramework() : _isConnected(false), _maxAttempts(3), _verbose(true) {}
 
 void OrionFramework::initialize(String SSID, String PASSWORD, String API_ADDRESS) {
-    Serial.println("[Orion] Connecting to WiFi network"); 
+    logVerbose("[Orion] Connecting to WiFi network"); 
 
     WiFi.mode(WIFI_STA);
     WiFi.begin(SSID, PASSWORD);
 
     while (WiFi.status() != WL_CONNECTED) {
-        Serial.print(".");
+        if (_verbose) {
+            Serial.print(".");
+        }
         delay(100);
     }
   
     _isConnected = true; 
     this->_apiAddress = API_ADDRESS;
-    Serial.println("\nSuccessfully connected to " + SSID);
+    logVerbose("\nSuccessfully connected to " + SSID);
 }
 
 void OrionFramework::sendTrigger(String endpoint) {
@@ -25,6 +27,7 @@ void OrionFramework::sendTrigger(String endpoint) {
 
     if (WiFi.status() == WL_CONNECTED) {
         String targetAddress = String("http://") + _apiAddress + "/" + endpoint;
+        logVerbose("[Orion] Sending request to: " + targetAddress);
         
         while (attemptCount < _maxAttempts){
             attemptCount++; 
@@ -34,16 +37,17 @@ void OrionFramework::sendTrigger(String endpoint) {
             int httpResponse = http.GET();
             
             if (httpResponse > 0) {
-                Serial.println("[Orion] Request sent successfully"); // TODO handle codes
+                logVerbose("[Orion] Request sent successfully"); // TODO handle codes
                 http.end();
                 break; 
             } else {
-                Serial.println("[Orion] Something went wrong while attempting to post request");
+                
+                logVerbose("[Orion] Something went wrong while attempting to post request");
             }
             http.end();
         }
     } else {
-        Serial.println("[Orion] Unable to send trigger. WiFi is not available");
+        logVerbose("[Orion] Unable to send trigger. WiFi is not available");
     }
 }
 
@@ -53,4 +57,14 @@ bool OrionFramework::isConnected() {
 
 void OrionFramework::setMaxAttempts(int maxAttempts) {
     this->_maxAttempts = maxAttempts;
+}
+
+void OrionFramework::logVerbose(String text) {
+    if (_verbose){
+        Serial.println(text);
+    }
+}
+
+void OrionFramework::setVerbose(bool state) {
+    _verbose = state; 
 }
