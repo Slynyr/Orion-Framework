@@ -4,7 +4,7 @@
 OrionFramework orion; 
 
 void setup() {
-  orion.initialize("MY_WIFI", "password123", "10.0.2.68"); 
+  orion.initialize("WIFI_SSID", "WIFI_PASSWORD", "10.0.2.68:4586"); 
   orion.setMaxAttempts(3); // The maximum amount of times a request is resent if unsuccessful 
   orion.setVerbose(true); // Set to false if you dont want serial printouts
 }
