@@ -1,0 +1,18 @@
+{
+    "name": "Orion Framework",
+    "version": "1.0.0",
+    "description": "A Rest API library that allows for easy integration with Orion",
+    "authors": [{
+        "name": "Slynyr",
+        "url": "https://github.com/Slynyr",
+        "maintainer": true
+    }],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Slynyr/Orion-Framework"
+    },
+    "license": "MIT",
+    "dependencies": [],
+    "frameworks": "esp32, avr",
+    "platforms": "*"
+}

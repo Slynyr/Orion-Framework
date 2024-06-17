@@ -1,7 +1,5 @@
 #include "orionFramework.h"
 
-
-
 OrionFramework::OrionFramework() : _isConnected(false), _maxAttempts(3), _verbose(true) {}
 
 void OrionFramework::initialize(String SSID, String PASSWORD, String API_ADDRESS) {
