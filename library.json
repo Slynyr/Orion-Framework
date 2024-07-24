@@ -1,6 +1,6 @@
 {
     "name": "Orion Framework",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "description": "A Rest API library that allows for easy integration with Orion",
     "authors": [{
         "name": "Slynyr",
